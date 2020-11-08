@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: amb-front
+  template:
+    metadata:
+      labels:
+        app: amb-front
+    spec:
+      containers:
+        - name: amb-front
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/front:1.1.0
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: eks-secret

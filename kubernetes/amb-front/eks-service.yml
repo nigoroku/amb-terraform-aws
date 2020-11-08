@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: eks-service
+  # annotations:
+  # ロードバランサーのアクセスログが有効かどうか。
+  # service.beta.kubernetes.io/aws-load-balancer-access-log-enabled: "true"
+  # アクセスログをパブリッシュするためのインターバル(分)。ユーザーはそのインターバルで5分もしくは60分で設定できます。
+  # service.beta.kubernetes.io/aws-load-balancer-access-log-emit-interval: "60"
+  # service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-name: "amb-front-log-bucket"
+spec:
+  type: LoadBalancer
+  selector:
+    app: amb-front
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 80
