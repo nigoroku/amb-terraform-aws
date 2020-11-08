@@ -1,6 +1,9 @@
 .envrc
+.env
 .kube/*
 manifests/*
 backend.tf
 .terraform*
 blog/*
+*.id_rsa*
+*.backup
