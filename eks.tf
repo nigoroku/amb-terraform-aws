@@ -48,13 +48,26 @@ resource "aws_eks_cluster" "eks-cluster" {
   version  = local.cluster_version
 
   vpc_config {
-    security_group_ids = [aws_security_group.cluster-master.id]
-
-    subnet_ids = aws_subnet.subnet.*.id
+    security_group_ids     = [aws_security_group.cluster-master.id]
+    subnet_ids             = aws_subnet.subnet.*.id
+    endpoint_public_access = true
   }
 
   depends_on = [
     aws_iam_role_policy_attachment.eks-cluster-policy,
     aws_iam_role_policy_attachment.eks-service-policy,
   ]
+}
+
+resource "aws_eks_node_group" "eks-cluster-node-group" {
+  cluster_name    = aws_eks_cluster.eks-cluster.name
+  node_group_name = "eks-cluster-node-group"
+  node_role_arn   = aws_iam_role.eks-node-role.arn
+  subnet_ids      = aws_subnet.subnet.*.id
+
+  scaling_config {
+    desired_size = 3
+    max_size     = 3
+    min_size     = 3
+  }
 }
