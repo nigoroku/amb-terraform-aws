@@ -1,22 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eks-deployment
+  name: front-deployment
+  labels:
+    app: amb-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: amb-front
+      app: amb-app
   template:
     metadata:
       labels:
-        app: amb-front
+        app: amb-app
     spec:
       containers:
         - name: amb-front
-          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/front:1.1.0
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/amb-front:latest
           ports:
             - containerPort: 3000
-          envFrom:
-            - secretRef:
-                name: eks-secret
+          env:
+            - name: VUE_APP_USER_API_ENDPOIT
+              value: "http://ambitious.nigoroku.net:8081"
+            - name: VUE_APP_TODO_API_ENDPOIT
+              value: "http://ambitious.nigoroku.net:8082"
+            - name: VUE_APP_ACHIEVEMENT_API_ENDPOIT
+              value: "http://ambitious.nigoroku.net:8083"
+            - name: VUE_APP_BOADLIST_API_ENDPOIT
+              value: "http://ambitious.nigoroku.net:8084"
