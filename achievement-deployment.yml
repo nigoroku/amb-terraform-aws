@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amb-achievement-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amb-achievement-app
+  template:
+    metadata:
+      labels:
+        app: amb-achievement-app
+    spec:
+      containers:
+        - name: amb-achievement-app
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/amb-achievement:latest
+          ports:
+            - containerPort: 8083

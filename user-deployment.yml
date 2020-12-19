@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amb-user-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amb-user-app
+  template:
+    metadata:
+      labels:
+        app: amb-user-app
+    spec:
+      containers:
+        - name: amb-user-app
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/amb-user:latest
+          ports:
+            - containerPort: 8081

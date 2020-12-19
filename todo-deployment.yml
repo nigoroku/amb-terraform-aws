@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amb-todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amb-todo-app
+  template:
+    metadata:
+      labels:
+        app: amb-todo-app
+    spec:
+      containers:
+        - name: amb-todo-app
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/amb-todo:latest
+          ports:
+            - containerPort: 8082

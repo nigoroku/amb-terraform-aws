@@ -1,0 +1,20 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: amb-app
+#   annotations:
+#     external-dns.alpha.kubernetes.io/hostname: ambitious.eks-nigoroku.net
+#     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:536969602909:certificate/bbcbadb1-4db7-4d26-8639-c9444910f2f9
+#     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+#     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: amb-app
+#   ports:
+#     - name: https
+#       port: 443
+#       targetPort: 8081
+#     - name: amb-achievement
+#       port: 4433
+#       targetPort: 8083

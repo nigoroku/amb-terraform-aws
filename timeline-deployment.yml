@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amb-timeline-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amb-timeline-app
+  template:
+    metadata:
+      labels:
+        app: amb-timeline-app
+    spec:
+      containers:
+        - name: amb-timeline-app
+          image: 536969602909.dkr.ecr.us-east-1.amazonaws.com/amb-boad-list:latest
+          ports:
+            - containerPort: 8084
