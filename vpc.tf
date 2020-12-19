@@ -14,7 +14,7 @@ resource "aws_subnet" "subnet" {
   cidr_block              = cidrsubnet(var.vpc_cidr_block, 8, count.index)
   map_public_ip_on_launch = true
 
-  tags = merge(local.default_tags, map("Name", "${local.base_name}-subnet-${count.index + 1}"))
+  tags = merge(local.default_tags, map("Name", "${local.base_name}-subnet-${count.index + 1}"), { "kubernetes.io/role/elb" = "" })
 }
 
 resource "aws_internet_gateway" "igw" {

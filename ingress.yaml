@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ambitious
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:536969602909:certificate/bbcbadb1-4db7-4d26-8639-c9444910f2f9
+    # external-dns.alpha.kubernetes.io/hostname: ambitious.eks-nigoroku.net
+  labels:
+    app: kube-system
+spec:
+  rules:
+    - host: ambitious.eks-nigoroku.net
+      http:
+        paths:
+          - path: /api/v1/user/*
+            backend:
+              serviceName: amb-user-service
+              servicePort: 8081
+    # - host: ambitious.eks-nigoroku.net
+    #   http:
+    #     paths:
+    #       - path: /api/v1/todo/*
+    #         backend:
+    #           serviceName: amb-todo-service
+    #           servicePort: 8082
+    # - host: ambitious.eks-nigoroku.net
+    #   http:
+    #     paths:
+    #       - path: /api/v1/achievement/*
+    #         backend:
+    #           serviceName: amb-achievement-service
+    #           servicePort: 8083
+    # - host: ambitious.eks-nigoroku.net
+    #   http:
+    #     paths:
+    #       - path: /api/v1/timeline/*
+    #         backend:
+    #           serviceName: amb-timeline-service
+    #           servicePort: 8084
