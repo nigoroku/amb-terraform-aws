@@ -1,38 +1,59 @@
-# Terraform で作成する EKS
+# Ambitious Engineering
 
-## デプロイ例
+## 概要
 
-### EKS の作成
+学習意欲・向上心があり、スキルの習得に励んでいるエンジニアが、得意分野を正しく評価されず、自分にマッチしていない環境で埋もれてしまう状況をなくしたいという思いで作成したエンジニア向けのWebアプリです。
 
-    terraform plan
-    terraform apply -var 'key_name=your_key_name'
+普段の学習や取組の実績をデータにして可視化することで、学習傾向・得意分野の分析を行います。その分析結果や学習成果を上長との面談の場などで提示し、人事の移動が流動的に行えていない環境で適材適所な配属の促進を後押しするツールとして利用する目的で作成しました。
 
-### ノードの認識
+よくある勉強のモチベーションを向上するようなアプリではなく、あくまで既に学習意欲がある人が利用する用途で作成しています。
 
-terraform output の結果をそれぞれファイルに保存する｡
+## 経緯
 
-- EKS ConfigMap → manifests/config_map.yml
-- kubectl config → .kube/config
+各々がスキルにマッチした環境で働くことができれば、会社とそこで働く社員双方が幸せになれると思い、本アプリを作成するに至りました。
 
-  terraform output kubectl_config > .kube/config
-  terraform output ConfigMap > manifests/config_map.yml
+## 機能一覧
 
-以下のコマンドを実行する｡
+- 学習時間分析結果ダッシュボード（マイページ）
+  - *アウトプット・インプット時間割合比較*
+  - カテゴリ別学習時間集計
+  - 集計期間単位の学習時間推移
+- Todo 登録機能（日単位に登録）
+- インプット実績登録機能（日単位に登録）
+- アウトプット実績登録機能（日単位に登録）
+- インプット・アウトプットタイムライン
+- アカウント情報変更機能
+- ログイン（JWT）
 
-    export KUBECONFIG='.kube/config'
-    kubectl apply -f manifests/config_map.yml
+## 利用技術
 
-ノードが Ready になって居ることを確認する｡
+### 構成図
+![Untitled Diagram (8)](https://user-images.githubusercontent.com/72080660/102783682-a978d080-43de-11eb-9742-b8def9fea9c9.png)
+### 言語
 
-    kubectl get nodes
+- Go（Gin-Gonic）
+- Nuxt.js
 
-## 変数
+### インフラ
 
-| 変数名         | デフォルト    | 説明                              |
-| -------------- | ------------- | --------------------------------- |
-| region         | us-west-1     | デプロイ先 AWS リージョン         |
-| vpc_cidr_block | 10.0.0.0/16   | VPC に割り当てるネットワーク範囲  |
-| project        | eks           | プロジェクト名(各リソースで使用)  |
-| environment    | dev           | 環境名(各リソースで使用)          |
-| num_subnets    | 3             | EKS で使用する AZ(サブネット)の数 |
-| key_name       | your_key_name | EC2 インスタンスに設定する鍵名    |
+- AWS
+- Docker
+- docker-compose
+- Kubernetes
+- GitHub Actions
+- Terraform
+
+### 関連リポジトリ
+- [フロント（Nuxt.js）](https://github.com/nigoroku/amb-front)
+- [ユーザーサービス（Go）](https://github.com/nigoroku/amb-user)
+- [Todoサービス（Go）](https://github.com/nigoroku/amb-todo)
+- [タイムラインサービス（Go）](https://github.com/nigoroku/amb-boad-list)
+- [実績管理サービス（Go）](https://github.com/nigoroku/amb-achievement)
+- [AWS構成ファイル(Terraform)、Kubernetesマニュフェスト等](https://github.com/nigoroku/amb-terraform-aws)
+
+### 補足
+
+普段の業務では、Java, SVN, オンプレの環境で作業をしているため、ほぼ業務での経験がない技術を使用しています。
+
+Vue.js と GitHub に関しては、業務で一度使用経験有り。
+
