@@ -49,7 +49,7 @@
 - [Todoサービス（Go）](https://github.com/nigoroku/amb-todo)
 - [タイムラインサービス（Go）](https://github.com/nigoroku/amb-boad-list)
 - [実績管理サービス（Go）](https://github.com/nigoroku/amb-achievement)
-- [AWS構成ファイル(Terraform)、Kubernetesマニュフェスト等](https://github.com/nigoroku/amb-terraform-aws)
+- [AWS構成ファイル（Terraform）、Kubernetesマニュフェスト等](https://github.com/nigoroku/amb-terraform-aws)
 
 ### 補足
 
